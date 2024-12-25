@@ -1,5 +1,11 @@
 from flask import Flask
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
 
-from app import app  # Import the app module to ensure routes are registered
+    # Import routes
+    from app.app import index, results
+    app.add_url_rule('/', 'index', index, methods=['GET', 'POST'])
+    app.add_url_rule('/results', 'results', results)
+
+    return app
