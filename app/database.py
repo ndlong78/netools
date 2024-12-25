@@ -5,13 +5,13 @@ def save_to_db(host, hops):
     c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS tracert_results
                  (host TEXT, hop_number INTEGER, ip_address TEXT, response_times TEXT)''')
-    
+
     for hop in hops:
         hop_number, ip_address, response_times = hop
         response_times_str = ', '.join(response_times)
         c.execute("INSERT INTO tracert_results (host, hop_number, ip_address, response_times) VALUES (?, ?, ?, ?)",
                   (host, hop_number, ip_address, response_times_str))
-    
+
     conn.commit()
     conn.close()
 
@@ -22,3 +22,11 @@ def get_tracert_results(host):
     results = c.fetchall()
     conn.close()
     return results
+
+def get_all_hosts():
+    conn = sqlite3.connect('network_results.db')
+    c = conn.cursor()
+    c.execute("SELECT DISTINCT host FROM tracert_results")
+    hosts = c.fetchall()
+    conn.close()
+    return [host[0] for host in hosts]

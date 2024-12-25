@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Saved Tracert Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Saved Tracert Results</h1>
+    <ul>
+        {% for host in hosts %}
+        <li><a href="{{ url_for('results', host=host) }}">{{ host }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="/">Back</a>
+</body>
+</html>

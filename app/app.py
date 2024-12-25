@@ -16,3 +16,7 @@ def results():
     host = request.args.get('host')
     results = database.get_tracert_results(host)
     return render_template('results.html', host=host, results=results)
+
+def saved_results():
+    hosts = database.get_all_hosts()
+    return render_template('saved_results.html', hosts=hosts)
