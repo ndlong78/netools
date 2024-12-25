@@ -3,6 +3,10 @@ from app import create_app
 
 app = create_app()
 
+@app.route('/tracert_progress/<host>')
+def tracert_progress(host):
+    return app.view_functions['tracert_progress'](host)
+
 @app.route('/saved_results')
 def saved_results():
     return app.view_functions['saved_results']()
