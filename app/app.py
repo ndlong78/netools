@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
-import tracert
-import database
+from app import tracert
+from app import database
 
 def index():
     if request.method == 'POST':
