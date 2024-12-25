@@ -16,7 +16,7 @@ EXPOSE 10000
 
 # Đặt biến môi trường cho Flask
 ENV FLASK_APP=app
-ENV FLASK_ENV=production
+ENV FLASK_ENV=development
 
 # Khởi chạy ứng dụng Flask
 CMD ["flask", "run", "--host=0.0.0.0", "--port=10000"]
