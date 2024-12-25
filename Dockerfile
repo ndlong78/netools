@@ -11,12 +11,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Sao chép toàn bộ mã nguồn vào thư mục làm việc
 COPY . .
 
-# Mở cổng 10000
-EXPOSE 10000
+# Mở cổng 8000
+EXPOSE 8000
 
 # Đặt biến môi trường cho Flask
 ENV FLASK_APP=app
 ENV FLASK_ENV=development
 
 # Khởi chạy ứng dụng Flask
-CMD ["flask", "run", "--host=0.0.0.0", "--port=10000"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=8000"]
