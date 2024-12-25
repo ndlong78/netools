@@ -8,7 +8,7 @@ def tracert_host(host):
 
     hops = []
     for line in iter(process.stdout.readline, ''):
-        yield line.strip()  # Hiển thị tiến trình theo thời gian thực
+        print(line.strip())  # Hiển thị tiến trình theo thời gian thực
         if re.match(r'^\s*\d+', line):
             hop_info = re.split(r'\s{2,}', line.strip())
             if len(hop_info) > 2:

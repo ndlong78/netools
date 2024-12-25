@@ -10,3 +10,9 @@ services:
       FLASK_APP: app
       FLASK_ENV: development
     restart: always
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
