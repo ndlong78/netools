@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, Response, stream_with_context
+from flask import Flask, render_template, request, Response, stream_with_context
 from app import tracert
 from app import database
 import platform
