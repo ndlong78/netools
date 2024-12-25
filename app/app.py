@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, Response, stream_with_context
-from app import tracert
 from app import database
 import platform
 import subprocess
@@ -12,11 +11,12 @@ def index():
     if request.method == 'POST':
         host = request.form['host']
         if host:
-            return redirect(url_for('tracert_progress', host=host))
-    return render_template('index.html')
+            return render_template('index.html', host=host)
+    return render_template('index.html', host=None)
 
-@app.route('/tracert_progress/<host>')
-def tracert_progress(host):
+@app.route('/tracert_progress')
+def tracert_progress():
+    host = request.args.get('host')
     def generate():
         command = ['traceroute', host] if platform.system() != 'Windows' else ['tracert', host]
         process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)

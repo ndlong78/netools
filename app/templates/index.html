@@ -11,18 +11,16 @@
         <input type="text" name="host" placeholder="Enter IP or Host" required>
         <button type="submit">Submit</button>
     </form>
+    {% if host %}
     <pre id="output"></pre>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const host = urlParams.get('host');
-        if (host) {
-            const eventSource = new EventSource(`/tracert_progress/${host}`);
-            eventSource.onmessage = function(event) {
-                const output = document.getElementById('output');
-                output.textContent += event.data + "\n";
-            };
-        }
+        const eventSource = new EventSource(`/tracert_progress?host={{ host }}`);
+        eventSource.onmessage = function(event) {
+            const output = document.getElementById('output');
+            output.textContent += event.data + "\n";
+        };
     </script>
+    {% endif %}
     <a href="{{ url_for('saved_results') }}">View Saved Results</a>
 </body>
 </html>
