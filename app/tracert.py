@@ -1,8 +1,11 @@
 import subprocess
 import re
+import platform
 
 def tracert_host(host):
-    result = subprocess.run(['tracert', host], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    # Sử dụng 'traceroute' trên Linux và 'tracert' trên Windows
+    command = ['traceroute', host] if platform.system() != 'Windows' else ['tracert', host]
+    result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     output = result.stdout.decode('utf-8')
     return output
 
