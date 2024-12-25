@@ -1,6 +1,9 @@
 from flask import render_template, request, redirect, url_for, Response
 from app import tracert
 from app import database
+import platform
+import subprocess
+import re
 
 def index():
     if request.method == 'POST':
@@ -14,6 +17,7 @@ def tracert_progress(host):
         command = ['traceroute', host] if platform.system() != 'Windows' else ['tracert', host]
         process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
+        hops = []
         for line in iter(process.stdout.readline, ''):
             yield f"data:{line.strip()}\n\n"  # Gửi dữ liệu theo thời gian thực tới trình duyệt
             if re.match(r'^\s*\d+', line):
