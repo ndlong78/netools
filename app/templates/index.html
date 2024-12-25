@@ -2,24 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tracert Results</title>
+    <title>NETOOLS</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Tracert Results for {{ host }}</h1>
-    <table>
-        <tr>
-            <th>Hop Number</th>
-            <th>IP Address</th>
-            <th>Response Times</th>
-        </tr>
-        {% for result in results %}
-        <tr>
-            <td>{{ result[0] }}</td>
-            <td>{{ result[1] }}</td>
-            <td>{{ result[2] }}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    <h1>Enter IP or Host</h1>
+    <form method="POST" action="/">
+        <input type="text" name="host" placeholder="Enter IP or Host" required>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
